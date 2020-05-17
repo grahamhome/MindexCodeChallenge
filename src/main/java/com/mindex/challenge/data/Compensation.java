@@ -1,8 +1,5 @@
 package com.mindex.challenge.data;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,8 +7,8 @@ import org.slf4j.LoggerFactory;
 
 public class Compensation {
 	private String employeeId;
-	private BigDecimal salary;
-	private Date effectiveDate;
+	private String salary;
+	private String effectiveDate;
 	
 	private static final Logger LOG = LoggerFactory.getLogger(Compensation.class);
 	
@@ -41,19 +38,19 @@ public class Compensation {
 		this.employeeId = employeeId;
 	}
 	
-	public BigDecimal getSalary() {
+	public String getSalary() {
 		return this.salary;
 	}
 	
-	public void setSalary(BigDecimal salary) {
+	public void setSalary(String salary) {
 		this.salary = salary;
 	}
 	
-	public Date getEffectiveDate() {
+	public String getEffectiveDate() {
 		return this.effectiveDate;
 	}
 	
-	public void seteffectiveDate(Date effectiveDate) {
+	public void seteffectiveDate(String effectiveDate) {
 		this.effectiveDate = effectiveDate;
 	}
 }

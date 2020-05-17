@@ -50,8 +50,9 @@ public class EmployeeServiceImplTest {
 
         // Create checks
         Employee createdEmployee = restTemplate.postForEntity(employeeUrl, testEmployee, Employee.class).getBody();
-
         assertNotNull(createdEmployee.getEmployeeId());
+        // Update test data with ID of new record before comparison
+        testEmployee.setEmployeeId(createdEmployee.getEmployeeId());
         assertEquals(testEmployee, createdEmployee);
 
 

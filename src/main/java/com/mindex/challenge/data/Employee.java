@@ -26,8 +26,7 @@ public class Employee {
 				other_employee.getFirstName().equals(this.getFirstName()) &&
 				other_employee.getLastName().equals(this.getLastName()) &&
 				other_employee.getPosition().equals(this.getPosition()) &&
-				other_employee.getDepartment().equals(this.getDepartment()) &&
-				other_employee.getDirectReports().equals(this.getDirectReports()));
+				other_employee.getDepartment().equals(this.getDepartment()));
     }
 
     public String getEmployeeId() {

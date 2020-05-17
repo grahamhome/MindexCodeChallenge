@@ -55,8 +55,8 @@ public class CompensationServiceImplTest {
     
     Compensation petesSalary = new Compensation();
     {
-    	petesSalary.seteffectiveDate(new Date());
-    	petesSalary.setSalary(new BigDecimal(40.40));
+    	petesSalary.seteffectiveDate(new Date().toString());
+    	petesSalary.setSalary(new BigDecimal(40.40).toString());
     }
     
     /**
@@ -96,7 +96,7 @@ public class CompensationServiceImplTest {
         // Update checks
         
         // Give Pete a raise
-        petesSalary.setSalary(petesSalary.getSalary().add(new BigDecimal(10.10)));
+        petesSalary.setSalary(new BigDecimal(50.50).toString());
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
