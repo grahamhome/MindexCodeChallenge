@@ -1,16 +1,10 @@
 package com.mindex.challenge.data;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-
 
 public class Compensation {
 	private String employeeId;
 	private String salary;
 	private String effectiveDate;
-	
-	private static final Logger LOG = LoggerFactory.getLogger(Compensation.class);
 	
 	public Compensation() {
 	}
@@ -24,7 +18,6 @@ public class Compensation {
 			return false;
 		}
 		Compensation other_comp = (Compensation) other;
-		LOG.debug("Comparing employee [{}] to [{}]", other_comp.getSalary(), this.getSalary());
 		return (other_comp.getEmployeeId().equals(this.getEmployeeId()) &&
 				other_comp.getSalary().equals(this.getSalary()) && 
 				other_comp.getEffectiveDate().equals(this.getEffectiveDate()));

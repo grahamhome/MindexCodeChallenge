@@ -63,7 +63,6 @@ public class EmployeeController {
     @GetMapping("/employee/{id}/compensation")
     public Compensation readCompensation(@PathVariable String id) {
         LOG.debug("Received employee compensation read request for id [{}]", id);
-
         return compensationService.read(id);
     }
 

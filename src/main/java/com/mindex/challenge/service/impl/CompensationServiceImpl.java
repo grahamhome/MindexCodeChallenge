@@ -36,7 +36,7 @@ public class CompensationServiceImpl implements CompensationService {
         Compensation compensation = compensationRepository.findByEmployeeId(employeeId);
         
         if (compensation == null) {
-        	// TODO: Replace with something to indicate that a 404 response should be returned?
+        	// TODO: Replace with a signal value to indicate that a 404 response should be returned?
             throw new RuntimeException("Invalid employeeId: " + employeeId);
         }
 
