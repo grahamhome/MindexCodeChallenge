@@ -1,7 +1,9 @@
 package com.mindex.challenge.controller;
 
+import com.mindex.challenge.data.Compensation;
 import com.mindex.challenge.data.Employee;
 import com.mindex.challenge.data.ReportingStructure;
+import com.mindex.challenge.service.CompensationService;
 import com.mindex.challenge.service.EmployeeService;
 import com.mindex.challenge.service.ReportingStructureService;
 
@@ -19,6 +21,9 @@ public class EmployeeController {
     
     @Autowired
     private ReportingStructureService reportingStructureService;
+    
+    @Autowired
+    private CompensationService compensationService;
 
     @PostMapping("/employee")
     public Employee create(@RequestBody Employee employee) {
@@ -44,7 +49,28 @@ public class EmployeeController {
     
     @GetMapping("/employee/{id}/reportingStructure")
     public ReportingStructure lookupReports(@PathVariable String id) {
-    	LOG.debug("Received employee reporting structure lookup request for id [{}]", id);
+    	LOG.debug("Received employee reporting structure lookup request for employee with id [{}]", id);
     	return reportingStructureService.create(employeeService.read(id));
+    }
+    
+    @PostMapping("/employee{id}/compensation")
+    public Compensation createCompensation(@PathVariable String id, @RequestBody Compensation compensation) {
+        LOG.debug("Received compensation create request for employee with id [{}]. Compensation: [{}]", id, compensation);
+        compensation.setEmployee(employeeService.read(id));
+        return compensationService.create(compensation);
+    }
+
+    @GetMapping("/employee/{id}/compensation")
+    public Compensation readCompensation(@PathVariable String id) {
+        LOG.debug("Received employee compensation read request for id [{}]", id);
+
+        return compensationService.read(employeeService.read(id));
+    }
+
+    @PutMapping("/employee/{id}/compensation")
+    public Compensation updateCompensation(@PathVariable String id, @RequestBody Compensation compensation) {
+        LOG.debug("Received employee compensation update request for employee with id [{}]. Compensation: [{}]", id, compensation);
+        compensation.setEmployee(employeeService.read(id));
+        return compensationService.update(compensation);
     }
 }
