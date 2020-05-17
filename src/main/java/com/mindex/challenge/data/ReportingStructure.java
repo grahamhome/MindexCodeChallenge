@@ -31,4 +31,12 @@ public class ReportingStructure {
 		List<Employee> reports = employeeService.read(employeeID).getDirectReports();
 		return reports.isEmpty() ? 0 : reports.size() + reports.stream().mapToInt(report -> lookUpReports(report.getEmployeeId())).sum();
 	}
+	
+	public int getNumberOfReports() {
+		return this.numberOfReports;
+	}
+	
+	public String getEmployeeID( ) {
+		return this.employee;
+	}
 }
