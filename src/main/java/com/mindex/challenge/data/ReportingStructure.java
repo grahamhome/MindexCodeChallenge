@@ -22,9 +22,9 @@ public class ReportingStructure {
 	
 	/**
 	 * Recursively counts all employees who report to the given employee.
-	 * N.B. Assumes that the org chart itself is non-recursive!
+	 * N.B. Assumes that the reporting structure itself is non-recursive!
 	 * @param employee: Employee to count the reports of.
-	 * @return The total number of reporting employees beneath the specified employee.
+	 * @return The sum of all employees at all levels beneath the specified employee.
 	 */
 	private int lookUpReports(Employee employee) {
 		List<Employee> reports = employee.getDirectReports();
