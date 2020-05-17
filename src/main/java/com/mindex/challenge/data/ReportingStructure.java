@@ -1,42 +1,49 @@
 package com.mindex.challenge.data;
 
-import com.mindex.challenge.data.Employee;
-import com.mindex.challenge.service.EmployeeService;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.mindex.challenge.data.Employee;
 
 
 public class ReportingStructure {
-	private String employee;
+	private Employee employee;
 	private int numberOfReports;
 	
-	@Autowired
-    private EmployeeService employeeService;
+	public ReportingStructure() {
+		
+	}
 	
-	public ReportingStructure(String employeeID) {
-		this.employee = employeeID;
-		this.numberOfReports = lookUpReports(employeeID);
+	public ReportingStructure(Employee employee) {
+		this.employee = employee;
+		this.numberOfReports = this.lookUpReports(employee);
 		
 	}
 	
 	/**
-	 * Recursively counts all reports under the employee with the given ID.
+	 * Recursively counts all employees who report to the given employee.
 	 * N.B. Assumes that the org chart itself is non-recursive!
-	 * @param employeeID: ID of the employee to count the reports of.
-	 * @return The total number of reports beneath the specified employee.
+	 * @param employee: Employee to count the reports of.
+	 * @return The total number of reporting employees beneath the specified employee.
 	 */
-	private int lookUpReports(String employeeID) {
-		List<Employee> reports = employeeService.read(employeeID).getDirectReports();
-		return reports.isEmpty() ? 0 : reports.size() + reports.stream().mapToInt(report -> lookUpReports(report.getEmployeeId())).sum();
+	private int lookUpReports(Employee employee) {
+		List<Employee> reports = employee.getDirectReports();
+		return reports == null ? 0 : reports.size() + reports.stream().mapToInt(report -> this.lookUpReports(report)).sum();
 	}
 	
 	public int getNumberOfReports() {
 		return this.numberOfReports;
 	}
 	
-	public String getEmployeeID( ) {
+	public Employee getEmployee() {
 		return this.employee;
+	}
+	
+	public void setNumberOfReports(int numberOfReports) {
+		this.numberOfReports = numberOfReports;
+	}
+	
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 }

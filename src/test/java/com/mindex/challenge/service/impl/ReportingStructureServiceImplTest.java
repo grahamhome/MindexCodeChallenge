@@ -1,8 +1,7 @@
-package com.mindex.challenge;
+package com.mindex.challenge.service.impl;
 
 import com.mindex.challenge.data.Employee;
 import com.mindex.challenge.data.ReportingStructure;
-import com.mindex.challenge.service.EmployeeService;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -22,19 +21,16 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ReportingStructureTest {
+public class ReportingStructureServiceImplTest {
 	
 	@LocalServerPort
     private int port;
-
-    @Autowired
-    private EmployeeService employeeService;
     
     @Autowired
     private TestRestTemplate restTemplate;
 
-    private String employeeUrl = "http://localhost:" + port + "/employee";
-    private String reportingStructureUrl = "http://localhost:" + port +"/reportingStructure/{id}";
+    private String employeeUrl;
+    private String reportingStructureUrl;
     
     /**
      * Create test data
@@ -64,6 +60,9 @@ class ReportingStructureTest {
     @Before
     public void setup() {
     	
+    	employeeUrl = "http://localhost:" + port + "/employee";
+    	reportingStructureUrl = "http://localhost:" + port +"/reportingStructure/{id}";
+    	
     	// Create Drone 3 with no subordinates
     	Employee drone3 = restTemplate.postForEntity(employeeUrl, testEmployees.get("drone3"), Employee.class).getBody();
 
@@ -81,7 +80,7 @@ class ReportingStructureTest {
     
     	// Add Drone 1 as subordinate to Boss
     	ArrayList<Employee> bossReports = new ArrayList<>();
-    	drone1Reports.add(drone1);
+    	bossReports.add(drone1);
     	testEmployees.get("boss").setDirectReports(bossReports);
     	
     	// Create Boss
@@ -98,7 +97,7 @@ class ReportingStructureTest {
      * Asserts that the correct ReportingStructure is returned for an employee with no direct reports.
      */
 	@Test
-	void testReportingStructureNoReports() {
+	public void testReportingStructureNoReports() {
 		HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -113,7 +112,7 @@ class ReportingStructureTest {
      * Asserts that the correct ReportingStructure is returned for an employee with 2 direct reports.
      */
 	@Test
-	void testReportingStructureTwoReports() {
+	public void testReportingStructureTwoReports() {
 		HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -129,7 +128,7 @@ class ReportingStructureTest {
      * who has 2 direct reports.
      */
 	@Test
-	void testReportingStructureThreeRecursiveReports() {
+	public void testReportingStructureThreeRecursiveReports() {
 		HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
