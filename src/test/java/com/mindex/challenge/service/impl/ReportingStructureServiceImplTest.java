@@ -61,7 +61,7 @@ public class ReportingStructureServiceImplTest {
     public void setup() {
     	
     	employeeUrl = "http://localhost:" + port + "/employee";
-    	reportingStructureUrl = "http://localhost:" + port +"/reportingStructure/{id}";
+    	reportingStructureUrl = "http://localhost:" + port +"/employee/{id}/reportingStructure";
     	
     	// Create Drone 3 with no subordinates
     	Employee drone3 = restTemplate.postForEntity(employeeUrl, testEmployees.get("drone3"), Employee.class).getBody();
