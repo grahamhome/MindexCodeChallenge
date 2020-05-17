@@ -53,10 +53,10 @@ public class EmployeeController {
     	return reportingStructureService.create(employeeService.read(id));
     }
     
-    @PostMapping("/employee{id}/compensation")
+    @PostMapping("/employee/{id}/compensation")
     public Compensation createCompensation(@PathVariable String id, @RequestBody Compensation compensation) {
         LOG.debug("Received compensation create request for employee with id [{}]. Compensation: [{}]", id, compensation);
-        compensation.setEmployee(employeeService.read(id));
+        compensation.setEmployeeId(id);
         return compensationService.create(compensation);
     }
 
@@ -64,13 +64,13 @@ public class EmployeeController {
     public Compensation readCompensation(@PathVariable String id) {
         LOG.debug("Received employee compensation read request for id [{}]", id);
 
-        return compensationService.read(employeeService.read(id));
+        return compensationService.read(id);
     }
 
     @PutMapping("/employee/{id}/compensation")
     public Compensation updateCompensation(@PathVariable String id, @RequestBody Compensation compensation) {
         LOG.debug("Received employee compensation update request for employee with id [{}]. Compensation: [{}]", id, compensation);
-        compensation.setEmployee(employeeService.read(id));
+        compensation.setEmployeeId(id);
         return compensationService.update(compensation);
     }
 }

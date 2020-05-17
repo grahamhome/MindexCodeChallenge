@@ -30,13 +30,14 @@ public class CompensationServiceImpl implements CompensationService {
     }
 
     @Override
-    public Compensation read(Employee employee) {
-        LOG.debug("Reading Compensation with for employee [{}]", employee);
+    public Compensation read(String employeeId) {
+        LOG.debug("Reading Compensation with for employee with ID [{}]", employeeId);
         
-        Compensation compensation = compensationRepository.findByEmployee(employee);
+        Compensation compensation = compensationRepository.findByEmployeeId(employeeId);
         
         if (compensation == null) {
-            throw new RuntimeException("Invalid employeeId: " + employee);
+        	// TODO: Replace with something to indicate that a 404 response should be returned?
+            throw new RuntimeException("Invalid employeeId: " + employeeId);
         }
 
         return compensation;

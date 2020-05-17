@@ -12,6 +12,23 @@ public class Employee {
 
     public Employee() {
     }
+    
+    @Override
+    public boolean equals(Object other) {
+    	if (other == this) {
+			return true;
+		}
+		if (!(other instanceof Employee)) {
+			return false;
+		}
+		Employee other_employee = (Employee) other;
+		return (other_employee.getEmployeeId().equals(this.getEmployeeId()) &&
+				other_employee.getFirstName().equals(this.getFirstName()) &&
+				other_employee.getLastName().equals(this.getLastName()) &&
+				other_employee.getPosition().equals(this.getPosition()) &&
+				other_employee.getDepartment().equals(this.getDepartment()) &&
+				other_employee.getDirectReports().equals(this.getDirectReports()));
+    }
 
     public String getEmployeeId() {
         return employeeId;
