@@ -2,18 +2,13 @@ package com.mindex.challenge.service.impl;
 
 import com.mindex.challenge.data.Compensation;
 import com.mindex.challenge.data.Employee;
-import com.mindex.challenge.data.ReportingStructure;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Date;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -39,8 +34,6 @@ public class CompensationServiceImplTest {
 
     private String employeeUrl;
     private String compensationUrl;
-    
-    private static final Logger LOG = LoggerFactory.getLogger(CompensationServiceImplTest.class);
     
     /**
      * Create test data
@@ -81,8 +74,6 @@ public class CompensationServiceImplTest {
 		// Create checks
         Compensation petesNewSalary = restTemplate.postForEntity(compensationUrl, petesSalary, Compensation.class, pete.getEmployeeId()).getBody();
         
-        LOG.debug("Sent: [{}]", petesSalary.getSalary());
-        LOG.debug("Received: [{}]", petesNewSalary.getSalary());
         assertNotNull(petesNewSalary);
         assertEquals(petesSalary, petesNewSalary);
 
