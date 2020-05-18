@@ -5,6 +5,7 @@ import com.mindex.challenge.data.Employee;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.junit.Before;
@@ -35,6 +36,10 @@ public class CompensationServiceImplTest {
     private String employeeUrl;
     private String compensationUrl;
     
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("mm-dd-yyyy");
+    
+    private Date today = new Date();
+    
     /**
      * Create test data
      */
@@ -48,7 +53,7 @@ public class CompensationServiceImplTest {
     
     Compensation petesSalary = new Compensation();
     {
-    	petesSalary.seteffectiveDate(new Date().toString());
+    	petesSalary.setEffectiveDate(dateFormat.format(today));
     	petesSalary.setSalary(new BigDecimal(40.40).toString());
     }
     

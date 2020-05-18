@@ -1,10 +1,20 @@
 package com.mindex.challenge.data;
 
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class Compensation {
 	private String employeeId;
-	private String salary;
-	private String effectiveDate;
+	private BigDecimal salary;
+	private Date effectiveDate;
+
+    private static final Logger LOG = LoggerFactory.getLogger(Compensation.class);
 	
 	public Compensation() {
 	}
@@ -18,8 +28,7 @@ public class Compensation {
 			return false;
 		}
 		Compensation other_comp = (Compensation) other;
-		return (other_comp.getEmployeeId().equals(this.getEmployeeId()) &&
-				other_comp.getSalary().equals(this.getSalary()) && 
+		return (other_comp.getSalary().equals(this.getSalary()) && 
 				other_comp.getEffectiveDate().equals(this.getEffectiveDate()));
 	}
 
@@ -32,18 +41,22 @@ public class Compensation {
 	}
 	
 	public String getSalary() {
-		return this.salary;
+		return this.salary.toPlainString();
 	}
 	
 	public void setSalary(String salary) {
-		this.salary = salary;
+		this.salary = new BigDecimal(salary);
 	}
 	
 	public String getEffectiveDate() {
-		return this.effectiveDate;
+		return new SimpleDateFormat("mm-dd-yyyy").format(this.effectiveDate);
 	}
 	
-	public void seteffectiveDate(String effectiveDate) {
-		this.effectiveDate = effectiveDate;
+	public void setEffectiveDate(String effectiveDate) {
+		try {
+			this.effectiveDate = new SimpleDateFormat("mm-dd-yyyy").parse(effectiveDate);
+		} catch (ParseException e) {
+			LOG.debug("Unable to parse date: [{}]", effectiveDate);
+		}
 	}
 }
